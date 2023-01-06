@@ -25,6 +25,10 @@ export class UserService {
     Object.assign(newUser, createUserDto)
      return await this.userRepository.save(newUser)
   }
+   findById(id: number): Promise<UserEntity>{
+       return this.userRepository.findOne({where: {id}})
+  }
+
   generateJwt(user: UserEntity): string{
       return sign({id: user.id, email: user.email, username: user.username}, JWT_SECRET)
   }
